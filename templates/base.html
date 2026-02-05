@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fishing Atlas</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Roboto:wght@300;400&family=Montserrat:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <a href="{% url 'index' %}">
+            🎣 PlevenFishing
+        </a>
+    </div>
+    
+    <ul class="nav-links">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle">Locations ▾</a>
+            <div class="dropdown-content">
+                <div class="dropdown-header">Rivers</div>
+                {% for river in nav_rivers %}
+                    <a href="{% url 'place_detail' river.slug %}">{{ river.name }}</a>
+                {% endfor %}
+
+                <div class="dropdown-header">Lakes</div>
+                {% for lake in nav_lakes %}
+                    <a href="{% url 'place_detail' lake.slug %}">{{ lake.name }}</a>
+                {% endfor %}
+
+                <div class="dropdown-header">Swamps</div>
+                {% for swamp in nav_swamps %}
+                    <a href="{% url 'place_detail' swamp.slug %}">{{ swamp.name }}</a>
+                {% endfor %}
+            </div>
+        </li>
+
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle">Fishing Methods ▾</a>
+            <div class="dropdown-content">
+                {% for method in nav_methods %}
+                    <a href="{% url 'method_detail' method.slug %}">{{ method.name }}</a>
+                {% endfor %}
+            </div>
+        </li>
+    </ul>
+</nav>
+
+<main class="container">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>🎣 PlevenFishing</h4>
+            <p>Your guide to the best fishing spots in the Pleven region.<br/>
+                Discover new horizons for your favorite hobby.  
+            </p>
+        </div>
+        
+        <div class="footer-section">
+            <h4>Connections</h4>
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About us</a></li>
+                <li><a href="{% url 'advices' %}">Fishing advices</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h4>Contacts</h4>
+            <ul>
+                <li>📍 Pleven, Bulgaria</li>
+                <li>📧 info@plevenfishing.bg</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>&copy; 2026 PlevenFishing.<br/>
+            All rights reserved.<br/>
+            Random!</p>
+    </div>
+</footer>
+
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

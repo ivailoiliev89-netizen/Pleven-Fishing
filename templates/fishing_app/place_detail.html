@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="detail-container">
+
+    <div class="detail-header">
+        <h1>{{ place.name }}</h1>
+        <p class="location-tag" style="text-align: center; font-family: sans-serif; font-size: 20px;">
+            📍 Region: {{ place.region }} / Type: {{ place.get_place_type_display }}
+        </p>
+    </div>
+
+    <hr class="map divider"/>
+
+    <div class="full-description">
+        <h3>Additional information</h3>
+        <p>{{ place.description|linebreaks }}</p>
+    </div>
+
+    <div class="detail-content">
+        <div class="main-image">
+            {% if place.image %}
+                <img src="{{ place.image.url }}" alt="{{ place.name }}">
+            {% endif %}
+        </div>
+
+        <div class="info-sidebar">
+            <div class="info-box">
+                <h4>🎣 Appropriate methods:</h4>
+                <ul>
+                    {% for method in place.methods.all %}
+                        <li><a href="{% url 'method_detail' method.slug %}">{{ method.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <h4>🐟 Types of fish here:</h4>
+                <div class="fish-list">
+                    {% for fish in place.fishes.all %}
+                        <span class="fish-item">{{ fish.name }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if place.map_embed %}
+    <hr class="map-divider"/>
+    <div class="map-container">
+        <h3 class="map-title">📍 Location (Google Map):</h3>
+        <div class="responsive-map">
+            {{ place.map_embed|safe }}
+        </div>
+    </div>
+    {% endif %}
+    
+</div>
+{% endblock %}
