@@ -34,13 +34,15 @@ integrated with Google Maps for precise navigation.
 - ---> SECRET_KEY=any-long-random-string
 - Prepare the PostgreSQL database : python manage.py migrate
 - Since the database is empty by default, create an admin account to add fishing spots: python manage.py createsuperuser
-- Now you can log in at http://127.0.0.1:8000/admin and start adding Rivers, Lakes, Swamps and Methods.
 - python manage.py runserver
+- Now you can log in at http://127.0.0.1:8000/admin and start adding Rivers, Lakes, Swamps and Methods.
+
 
 ## Future Improvements
 - Integration with a Weather API for real-time fishing conditions.
 - User-submitted fishing reports with photo uploads.
 - Interactive "Catch Map" using Leaflet.js.
+
 
 
 
